@@ -33,6 +33,13 @@ map ,o <Esc>:tabnew<Space>
 map <F7> <Esc>:tabprevious<Enter> 
 map <F8> <Esc>:tabnext<Enter> 
 
+inoremap [ []<Esc>i
+inoremap { {}<Esc>i
+inoremap ( ()<Esc>i
+inoremap " ""<Esc>i
+inoremap ' ''<Esc>i
+inoremap < <><Esc>i
+
 iabbrev bin #!/bin/bash
 
 " HSpice
@@ -42,6 +49,15 @@ function! s:hspiceSetup()
 	map <F5> :!hspice.exe -mt 8 -hpp -i % -o  %:t:r.lis <Enter>
 	map <F4> :!python.exe -c "import hslib as hs; hs.cleanHs()" <Enter>
 	nnoremap ,b :-1read /cygdrive/c/Users/salatiel/Documents/cidesi/libs/snippets/placeholder<CR>
+endfunction
+
+" VIM
+autocmd FileType vim call s:vimSetup()
+function! s:vimSetup()
+	"set nonumber
+	nnoremap <C-k> I"
+	inoremap <C-k> <Esc>0I"
+	vnoremap <C-k> I"
 endfunction
 
 " Latex
