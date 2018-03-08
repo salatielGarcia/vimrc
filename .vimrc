@@ -12,7 +12,10 @@ set cursorline
 
 filetype indent on
 filetype plugin on
-"set wildmenu
+set wildmenu
+
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
 
 set rtp+=~/.vim/bundle/vundle.vim
 set rtp+=~/.vim/bundle/vim-snipmate/snippets
@@ -26,13 +29,41 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
+Plugin 'scrooloose/nerdcommenter'
 "Plugin 'vim-scripts/UltiSnips'
 call vundle#end()
 
+"======================== Plugin configurations
+" snipMate :
 imap <tab> <Plug>snipMateNextOrTrigger
 
+" nedCommenter:
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+
+
+"========================
+
 set path+=**
-set wildmenu
 
 " command! MakeTags !ctags -R
 
@@ -50,6 +81,12 @@ set showtabline=2
 map ,o <Esc>:tabnew<Space>
 map <F7> <Esc>:tabprevious<Enter> 
 map <F8> <Esc>:tabnext<Enter> 
+
+" Split commands
+map ,vo <Esc>:vsp<Space>
+map ,ho <Esc>:sp<Space>
+" map <C-w,C-w> <Esc><C-tab>
+
 
 inoremap [ []<Esc>i
 inoremap { {}<Esc>i
