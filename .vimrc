@@ -1,4 +1,8 @@
-colorscheme default
+" .vimrc editado por SGM
+
+syntax enable
+colorscheme monokai
+" colorscheme rupza
 
 set nocompatible
 set number
@@ -6,7 +10,7 @@ set ruler
 set hlsearch
 set ignorecase
 set tabstop=4
-set softtabstop=4
+set softtabstop=-1 shiftwidth=0
 set showcmd
 set cursorline
 
@@ -16,6 +20,12 @@ set wildmenu
 
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver100-iCursor
+
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 set rtp+=~/.vim/bundle/vundle.vim
 set rtp+=~/.vim/bundle/vim-snipmate/snippets
@@ -30,6 +40,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
 "Plugin 'vim-scripts/UltiSnips'
 call vundle#end()
 
@@ -70,10 +81,11 @@ set path+=**
 " System commands
 set autoread 
 set autowrite
-map ,r <Esc>:e!<Enter>
-map ,e <Esc>:edit .<Enter>
-map ,w <Esc>:w<Enter>
-map ,q <Esc>:q<Enter>
+autocmd vimenter * NERDTree
+map ,r  <Esc>:e!<Enter>
+map ,e  <Esc>:edit .<Enter>
+map ,ww <Esc>:w<Enter>
+map ,q  <Esc>:q!<Enter>
 map ,wq <Esc>:wq<Enter>
 
 " Tab commands
@@ -86,7 +98,7 @@ map <F8> <Esc>:tabnext<Enter>
 map ,vo <Esc>:vsp<Space>
 map ,ho <Esc>:sp<Space>
 " map <C-w,C-w> <Esc><C-tab>
-
+nmap <Tab> <C-w><C-w>
 
 inoremap [ []<Esc>i
 inoremap { {}<Esc>i
@@ -133,7 +145,10 @@ endfunction
 " Matlab
 autocmd FileType matlab call s:matSetup()
 function! s:matSetup()
+	" inoremap <F5> <Esc>:!octave-cli --persist % <CR>
+	" nnoremap <F5> :!octave-cli --persist  % <CR>
 	nnoremap <C-k> I%
 	inoremap <C-k> <Esc>0I%
 	vnoremap <C-k> I%
 endfunction
+
