@@ -13,6 +13,7 @@ set tabstop=4
 set softtabstop=-1 shiftwidth=0
 set showcmd
 set cursorline
+set mouse=a
 
 filetype indent on
 filetype plugin on
@@ -20,7 +21,7 @@ set wildmenu
 
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver100-iCursor
-
+set guicursor+=n-v-c:blinkon1
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
 if has("autocmd")
@@ -81,7 +82,11 @@ set path+=**
 " System commands
 set autoread 
 set autowrite
-autocmd vimenter * NERDTree
+
+" Para usar NERDTree por default desscomentar:
+" autocmd vimenter * NERDTree
+
+map ,f  :NERDTree<CR>
 map ,r  <Esc>:e!<Enter>
 map ,e  <Esc>:edit .<Enter>
 map ,ww <Esc>:w<Enter>
@@ -107,9 +112,18 @@ inoremap " ""<Esc>i
 inoremap ' ''<Esc>i
 inoremap < <><Esc>i
 
-"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 
 "iabbrev bin #!/bin/bash
+
+" Python
+autocmd FileType python call s:pythonSetup()
+function! s:pythonSetup()
+	"set nonumber
+	inoremap <F5> <Esc>:!python3.6 % <CR>
+	nnoremap <F5> :!python3.6 % <CR>
+endfunction
 
 " HSpice
 autocmd FileType spice call s:hspiceSetup()
@@ -127,13 +141,13 @@ function! s:hspiceSetup()
 endfunction
 
 " VIM
-autocmd FileType vim call s:vimSetup()
-function! s:vimSetup()
-	"set nonumber
-	nnoremap <C-k> I"
-	inoremap <C-k> <Esc>0I"
-	vnoremap <C-k> I"
-endfunction
+" autocmd FileType vim call s:vimSetup()
+" function! s:vimSetup()
+"     "set nonumber
+"       nnoremap <C-k> I"
+"      inoremap <C-k> <Esc>0I"
+"      vnoremap <C-k> I"
+" endfunction
 
 " Latex
 autocmd FileType tex call s:texSetup()
@@ -147,8 +161,8 @@ autocmd FileType matlab call s:matSetup()
 function! s:matSetup()
 	" inoremap <F5> <Esc>:!octave-cli --persist % <CR>
 	" nnoremap <F5> :!octave-cli --persist  % <CR>
-	nnoremap <C-k> I%
-	inoremap <C-k> <Esc>0I%
-	vnoremap <C-k> I%
+	" nnoremap <C-k> I%
+	" inoremap <C-k> <Esc>0I%
+	" vnoremap <C-k> I%
 endfunction
 
